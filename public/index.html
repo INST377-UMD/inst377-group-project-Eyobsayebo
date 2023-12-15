@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Stock Notification System</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Stock Notification System</h1>
+      <!-- Navigation bar -->
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html" class="home-icon"
+              ><img
+                src="https://cdn2.iconfinder.com/data/icons/beauty-15/45/home-1024.png"
+                alt="Home"
+            /></a>
+          </li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="help.html">Help</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="search-section">
+        <label for="stock-search">Search Stock:</label>
+        <select id="stock-search"></select>
+        <button id="search-button" onclick="searchStock()">Search</button>
+      </section>
+       
+      </section>
+
+      <section id="results-section">
+        <div id="results-container"></div>
+      </section>
+      <h2>Popular Stocks</h2>
+      <section id="popular-stocks">
+        <div class="stock-icon" onclick="searchPopularStock('AAPL')">
+          <p>Apple</p>
+        </div>
+        <div class="stock-icon" onclick="searchPopularStock('GOOGL')">
+          <p>Google</p>
+        </div>
+        <div class="stock-icon" onclick="searchPopularStock('MSFT')">
+          <p>Microsoft</p>
+        </div>
+        <div class="stock-icon" onclick="searchPopularStock('AMZN')">
+          <p>Amazon</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2023 Stock Notification System</p>
+    </footer>
+
+    <script src="main.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", fetchStockSymbols);
+    </script>
+  </body>
+</html>
