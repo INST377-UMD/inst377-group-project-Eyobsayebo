@@ -1,67 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Stock Notification System</title>
-  </head>
 
-  <body>
-    <header>
-      <h1>Stock Notification System</h1>
-      <!-- Navigation bar -->
-      <nav>
-        <ul>
-          <li>
-            <a href="index.html" class="home-icon"
-              ><img
-                src="https://cdn2.iconfinder.com/data/icons/beauty-15/45/home-1024.png"
-                alt="Home"
-            /></a>
-          </li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="help.html">Help</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <section id="search-section">
-        <label for="stock-search">Search Stock:</label>
-        <select id="stock-search"></select>
-        <button id="search-button" onclick="searchStock()">Search</button>
-      </section>
-       
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Stock Notification System</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-      <section id="results-section">
-        <div id="results-container"></div>
-      </section>
-      <h2>Popular Stocks</h2>
-      <section id="popular-stocks">
-        <div class="stock-icon" onclick="searchPopularStock('AAPL')">
-          <p>Apple</p>
-        </div>
-        <div class="stock-icon" onclick="searchPopularStock('GOOGL')">
-          <p>Google</p>
-        </div>
-        <div class="stock-icon" onclick="searchPopularStock('MSFT')">
-          <p>Microsoft</p>
-        </div>
-        <div class="stock-icon" onclick="searchPopularStock('AMZN')">
-          <p>Amazon</p>
-        </div>
-      </section>
-    </main>
+</head>
 
-    <footer>
-      <p>&copy; 2023 Stock Notification System</p>
-    </footer>
+<body>
+  <header>
+    <h1>Stock Notification System</h1>
+    <!-- Navigation bar -->
+    <nav>
+      <ul>
+        <li>
+          <a href="index.html" class="home-icon"><img
+              src="https://cdn2.iconfinder.com/data/icons/beauty-15/45/home-1024.png" alt="Home" /></a>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="help.html">Help</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="search-section">
+      <label for="stock-search">Search Stock:</label>
+      <select id="stock-search">
+        <!-- Placeholder option -->
+        <option value="" disabled selected>Select a stock</option>
+        <!-- stocks option -->
+        <option value="AAPL">AAPL - Apple Inc.</option>
+        <option value="GOOGL">GOOGL - Alphabet Inc.</option>
+        <option value="MSFT">MSFT - Microsoft Corporation</option>
+        <option value="AMZN">AMZN - Amazon.com Inc.</option>
+        <option value="TSLA">TSLA - Tesla Inc.</option>
+        <option value="FB">FB - Meta Platforms Inc. (formerly Facebook Inc.)</option>
+        <option value="NVDA">NVDA - NVIDIA Corporation</option>
+        <option value="NFLX">NFLX - Netflix Inc.</option>
+        <option value="PYPL">PYPL - PayPal Holdings Inc.</option>
+        <option value="GS">GS - The Goldman Sachs Group Inc.</option>
+        <option value="JPM">JPM - JPMorgan Chase & Co.</option>
+        <option value="DIS">DIS - The Walt Disney Company</option>
+        <option value="V">V - Visa Inc.</option>
+        <option value="IBM">IBM - International Business Machines Corporation</option>
+        <option value="BA">BA - The Boeing Company</option>
+        <option value="CSCO">CSCO - Cisco Systems Inc.</option>
+        <option value="WMT">WMT - Walmart Inc.</option>
+        <option value="VZ">VZ - Verizon Communications Inc.</option>
+        <option value="INTC">INTC - Intel Corporation</option>
+        <option value="PEP">PEP - PepsiCo Inc.</option>
 
-    <script src="main.js"></script>
+      </select>
+      <button id="search-button" onclick="searchStock()">Search</button>
+    </section>
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+    <section id="results-section">
+      <div id="results-container"></div>
+    </section>
+    <h2>Popular Stocks</h2>
+    <section id="popular-stocks">
+      <div class="stock-icon" onclick="searchPopularStock('AAPL')">
+        <p>Apple</p>
+      </div>
+      <div class="stock-icon" onclick="searchPopularStock('GOOGL')">
+        <p>Google</p>
+      </div>
+      <div class="stock-icon" onclick="searchPopularStock('MSFT')">
+        <p>Microsoft</p>
+      </div>
+      <div class="stock-icon" onclick="searchPopularStock('AMZN')">
+        <p>Amazon</p>
+      </div>
+      <div class="stock-icon" onclick="searchPopularStock('TSLA ')">
+        <p>Tesla</p>
+      </div>
+      <div class="stock-icon" onclick="searchPopularStock('NFLX')">
+        <p>Netflix</p>
+      </div>
+    </section>
+  </main>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", fetchStockSymbols);
-    </script>
-  </body>
+  <footer>
+    <p>&copy; 2023 Stock Notification System</p>
+  </footer>
+
+  <script src="main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", fetchStockSymbols);
+  </script>
+  <script>
+    const ctx = document.getElementById('myChart');
+    let myChart; // Declare myChart globally to use it in different functions
+
+    function updateChart(data) {
+      // Extract relevant data from the API response
+      const stockSymbol = document.getElementById("stock-search").value;
+      const currentPrice = data.c;
+      const highPrice = data.h;
+      const lowPrice = data.l;
+
+      // Update the chart with the new data
+      if (myChart) {
+        myChart.destroy(); // Destroy the existing chart if it exists
+      }
+
+      myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: [stockSymbol],
+          datasets: [{
+            label: 'Current Price',
+            data: [currentPrice],
+            backgroundColor: 'blue', // Set the color of the bar
+            borderWidth: 1
+          }, {
+            label: 'High Price',
+            data: [highPrice],
+            backgroundColor: 'green', // Set the color of the bar
+            borderWidth: 1
+          }, {
+            label: 'Low Price',
+            data: [lowPrice],
+            backgroundColor: 'red', // Set the color of the bar
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+
+
+    // Function to search for a stock
+    function searchStock() {
+      const symbol = document.getElementById("stock-search").value;
+      const apiUrl = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=clse5fpr01qoidjepeg0clse5fpr01qoidjepegg`;
+
+      // Make API call
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          console.log('API Response:', data);
+          updateChart(data);
+        })
+        .catch(error => {
+          console.error('API call failed:', error);
+        });
+    }
+
+  </script>
+
+
+</body>
+
 </html>
