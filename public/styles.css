@@ -1,0 +1,149 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #3e053e;
+  color: #fff;
+  text-align: center;
+  padding: 0.5rem;
+  position: relative;
+}
+footer {
+  background-color: #3e053e;
+  color: #fff;
+  text-align: center;
+  padding: 0.5rem;
+  position: relative;
+}
+nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline;
+  margin-right: 1rem;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+/* Home icon style */
+.home-icon img {
+  width: 30px;
+  height: auto;
+}
+
+main {
+  padding: 1rem;
+}
+
+#search-section,
+#results-section {
+  border: 1px solid #3e053e;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+button {
+  cursor: pointer;
+}
+
+#popular-stocks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.stock-icon {
+  text-align: center;
+  padding: 4.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.stock-icon i {
+  font-size: 2.5rem;
+}
+
+.stock-icon:hover {
+  filter: brightness(1.4);
+}
+
+/* Apple button style */
+.stock-icon:nth-child(1) {
+  background-color: #a4c93b;
+  color: #fff;
+}
+
+/* Google button style */
+.stock-icon:nth-child(2) {
+  background-color: #0a61ee;
+  color: #fff;
+}
+
+/* Microsoft button style */
+.stock-icon:nth-child(3) {
+  background-color: #00a1f1;
+  color: #fff;
+}
+
+/* Amazon button style */
+.stock-icon:nth-child(4) {
+  background-color: #ff9900;
+  color: #fff;
+}
+/* Tesla button style */
+.stock-icon:nth-child(5) {
+  background-color: #00ff2a;
+  color: #fff;
+}
+/* Netflix button style */
+.stock-icon:nth-child(6) {
+  background-color: rgb(214, 21, 21);
+  color: #fff;
+}
+#search-button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#search-button:hover {
+  background-color: #2980b9;
+}
+/* Apply styles to the label */
+label[for="stock-search"] {
+  font-size: 16px; 
+  font-weight: bold;
+  color: #333; 
+  margin-right: 10px; 
+}
+
+/* Apply styles to the select element */
+#stock-search {
+  font-size: 16px; 
+  padding: 8px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+}
+
+
