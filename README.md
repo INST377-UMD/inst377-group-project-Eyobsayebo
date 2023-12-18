@@ -31,7 +31,7 @@ Navigate to your terminal and execute:
 npm start
 This project will then be accessible at http://localhost:4000/index.html.
 
-**API Documentation**
+### API Documentation
 The server application interacts with the Finnhub API to fetch stock-related information. Finnhub provides a comprehensive financial data API, allowing us to access stock symbols and quote details.
 
 **Endpoints**
@@ -41,10 +41,10 @@ The server application interacts with the Finnhub API to fetch stock-related inf
 **GET `/help`**: Serve the help HTML file.
 **GET `/api/stock-symbols`**: Fetch stock symbols from the Finnhub API.
 
-**Known Bugs**
+### Known Bugs
 No known bugs at the moment.
 
-**RoadMap for Future Development**
+### RoadMap for Future Development
 Future development should focus on the following areas:
 
 Enhancements to User Interface:
