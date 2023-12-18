@@ -6,7 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
   <title>Stock Notification System</title>
+  <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
 
 </head>
 
@@ -62,7 +73,7 @@
     <section id="results-section">
       <div id="results-container"></div>
     </section>
-    <h2>Popular Stocks</h2>
+    <h2 id="PopularStocks">Popular Stocks</h2>
     <section id="popular-stocks">
       <div class="stock-icon" onclick="searchPopularStock('AAPL')">
         <p>Apple</p>
@@ -82,6 +93,54 @@
       <div class="stock-icon" onclick="searchPopularStock('NFLX')">
         <p>Netflix</p>
       </div>
+    </section>
+    <section class="section container">
+      <form name="contact" id="contact-form">
+        <h1 class="title" id="contact">Register Here to Get Alert</h1>
+        <div class="field">
+          <label class="label" for="name">Name</label>
+          <div class="control">
+            <input required class="input" type="text" placeholder="yourname" name="name" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <div class="control has-icons-left">
+            <input class="input" type="email" required placeholder="Email input" name="email" />
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="subject">Subject</label>
+          <div class="control">
+            <div class="select">
+              <select name="subject">
+                <option value="">Select a subject</option>
+                <option value="quote">Day trader</option>
+                <option value="project">Investor</option>
+                <option value="job">Company</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="message">message</label>
+          <div class="control">
+            <textarea required class="textarea" placeholder="Textarea" name="message"></textarea>
+          </div>
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-primary" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
     </section>
   </main>
 
@@ -162,7 +221,41 @@
 
   </script>
 
+<script src="https://unpkg.com/@supabase/supabase-js"></script>
+<script>
+    const { createClient } = supabase
+    supabase = createClient("https://bsrcismmzhcqwpcjtnef.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJzcmNpc21temhjcXdwY2p0bmVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI3ODA2MTUsImV4cCI6MjAxODM1NjYxNX0.S9mDR4ToT28gQnz6mHNNyogkXk6Vw_3hFBk8txb2nnU")
+    
+    const form = document.querySelector('#contact-form')
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault()
+
+        const formInputs = form.querySelectorAll('input, select, textarea')
+
+        let submision = {}
+
+        formInputs.forEach(element => {
+          const { value, name } = element
+          if (value) {
+              submision[name] = value
+          }
+        })
+
+        const { error } = await supabase.from('entries').insert([submision], { returning: 'minimal'})
+
+        if (error) {
+            alert('There was an error please try again')
+        } else {
+            alert('Thanks for registor Stock Notification System')
+        }
+
+        formInputs.forEach(element => element.value = '')
+
+    })
+</script>
+
 
 </body>
 
 </html>
+

@@ -8,7 +8,7 @@ header {
   background-color: #3e053e;
   color: #fff;
   text-align: center;
-  padding: 0.5rem;
+  padding: 0.9rem;
   position: relative;
 }
 footer {
@@ -83,6 +83,13 @@ button {
 
 .stock-icon:hover {
   filter: brightness(1.4);
+}
+#PopularStocks {
+  color: #007bff; 
+  font-family: 'Arial', sans-serif;
+  font-size: 24px; 
+  text-decoration: none; 
+  padding: 20px;
 }
 
 /* Apple button style */
