@@ -12,7 +12,7 @@ The Stock Notification System is designed to be compatible with modern web brows
 
 ## User Manual
 
-For detailed instructions on how to use the Stock Notification System, please refer to the [User Manual](userManual.md).
+For detailed instructions on how to use the Stock Notification System, please refer to the [User Manual](./docs/userManual.md).
 
 ## Developer Manual
 
